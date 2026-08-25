@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Spin Wheel</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f3f6;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .counter {
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        /* INPUT SECTION */
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+
+            gap: 10px;
+
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #4CAF50;
+        }
+
+        button {
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        #addButton {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #addButton:hover {
+            background: #388E3C;
+        }
+
+        /* WHEEL */
+
+        .wheel-section {
+            margin-top: 20px;
+        }
+
+        .wheel-container {
+            position: relative;
+
+            width: 280px;
+            height: 280px;
+
+            margin: 0 auto 25px;
+        }
+
+        #wheel {
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            border: 8px solid #222;
+
+            background: conic-gradient(
+                #ff5959 0deg 60deg,
+                #ffca3a 60deg 120deg,
+                #8ac926 120deg 180deg,
+                #1982c4 180deg 240deg,
+                #6a4c93 240deg 300deg,
+                #ff924c 300deg 360deg
+            );
+
+            transition:
+                transform 4s cubic-bezier(
+                    0.17,
+                    0.67,
+                    0.12,
+                    0.99
+                );
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wheel-center {
+            width: 75px;
+            height: 75px;
+
+            background: white;
+
+            border: 5px solid #222;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            font-weight: bold;
+        }
+
+        /* POINTER */
+
+        .pointer {
+            position: absolute;
+
+            top: -15px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 0;
+            height: 0;
+
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+
+            border-top: 30px solid #222;
+
+            z-index: 10;
+        }
+
+        /* BUTTONS */
+
+        #spinButton {
+            width: 100%;
+
+            background: #222;
+
+            color: white;
+
+            margin-bottom: 10px;
+        }
+
+        #nextButton {
+            width: 100%;
+
+            background: #2196F3;
+
+            color: white;
+
+            margin-bottom: 10px;
+        }
+
+        #revealButton {
+            background: #ff9800;
+
+            color: white;
+        }
+
+        #clearButton {
+            width: 100%;
+
+            margin-top: 20px;
+
+            background: #e53935;
+
+            color: white;
+        }
+
+        /* RESULT */
+
+        .result-section {
+            margin-top: 30px;
+
+            padding: 20px;
+
+            background: #f7f7f7;
+
+            border-radius: 12px;
+        }
+
+        .result-section h2 {
+            margin-bottom: 20px;
+
+            font-size: 20px;
+        }
+
+        #answerResult {
+            margin-top: 15px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            min-height: 25px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>🎡 Study Spin Wheel</h1>
+
+
+    <p class="counter">
+
+        Questions:
+
+        <span id="questionCount">0</span>
+
+        / 100
+
+    </p>
+
+
+    <!-- ============================= -->
+    <!-- QUESTION INPUT -->
+    <!-- ============================= -->
+
+    <div class="input-section">
+
+
+        <input
+            type="text"
+            id="questionInput"
+            placeholder="Enter your question"
+            autocomplete="off"
+        >
+
+
+        <input
+            type="text"
+            id="answerInput"
+            placeholder="Enter the answer"
+            autocomplete="off"
+        >
+
+
+        <button id="addButton">
+
+            ➕ Add Question
+
+        </button>
+
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- WHEEL -->
+    <!-- ============================= -->
+
+    <div class="wheel-section">
+
+
+        <div class="wheel-container">
+
+
+            <div class="pointer"></div>
+
+
+            <div id="wheel">
+
+
+                <div class="wheel-center">
+
+                    SPIN
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <button id="spinButton">
+
+            🎡 Spin the Wheel
+
+        </button>
+
+
+        <button id="nextButton">
+
+            🔄 Next Question
+
+        </button>
+
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- RESULT -->
+    <!-- ============================= -->
+
+    <div class="result-section">
+
+
+        <h2 id="questionResult">
+
+            Your question will appear here
+
+        </h2>
+
+
+        <button id="revealButton">
+
+            👀 Reveal Answer
+
+        </button>
+
+
+        <p id="answerResult"></p>
+
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- CLEAR -->
+    <!-- ============================= -->
+
+    <button id="clearButton">
+
+        🗑️ Clear All Questions
+
+    </button>
+
+
+</div>
+
+
+
+<script>
+
+
+    // ==========================================
+    // SETTINGS
+    // ==========================================
+
+    const MAX_QUESTIONS = 100;
+
+
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    let questions = [];
+
+    let selectedQuestion = null;
+
+    let currentRotation = 0;
+
+
+    // ==========================================
+    // GET HTML ELEMENTS
+    // ==========================================
+
+    const questionInput =
+        document.getElementById("questionInput");
+
+    const answerInput =
+        document.getElementById("answerInput");
+
+    const addButton =
+        document.getElementById("addButton");
+
+    const spinButton =
+        document.getElementById("spinButton");
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+    const revealButton =
+        document.getElementById("revealButton");
+
+    const clearButton =
+        document.getElementById("clearButton");
+
+    const questionResult =
+        document.getElementById("questionResult");
+
+    const answerResult =
+        document.getElementById("answerResult");
+
+    const questionCount =
+        document.getElementById("questionCount");
+
+    const wheel =
+        document.getElementById("wheel");
+
+
+    // ==========================================
+    // LOAD SAVED QUESTIONS
+    // ==========================================
+
+    function loadQuestions() {
+
+        const savedData =
+            localStorage.getItem("studyQuestions");
+
+        if (savedData) {
+
+            try {
+
+                const data =
+                    JSON.parse(savedData);
+
+                // Make sure the saved data is an array
+
+                if (Array.isArray(data)) {
+
+                    questions = data;
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Could not load saved questions."
+                );
+
+                questions = [];
+
+            }
+
+        }
+
+    }
+
+
+    loadQuestions();
+
+
+    // ==========================================
+    // UPDATE COUNTER
+    // ==========================================
+
+    function updateCounter() {
+
+        questionCount.textContent =
+            questions.length;
+
+    }
+
+
+    updateCounter();
+
+
+    // ==========================================
+    // SAVE QUESTIONS
+    // ==========================================
+
+    function saveQuestions() {
+
+        localStorage.setItem(
+
+            "studyQuestions",
+
+            JSON.stringify(questions)
+
+        );
+
+    }
+
+
+    // ==========================================
+    // ADD QUESTION
+    // ==========================================
+
+    addButton.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            // Get input values
+
+            const question =
+                questionInput.value.trim();
+
+            const answer =
+                answerInput.value.trim();
+
+
+            // Check maximum
+
+            if (questions.length >= MAX_QUESTIONS) {
+
+                alert(
+                    "You have reached the maximum of 100 questions!"
+                );
+
+                return;
+
+            }
+
+
+            // Check empty question
+
+            if (question === "") {
+
+                alert(
+                    "Please enter a question."
+                );
+
+                questionInput.focus();
+
+                return;
+
+            }
+
+
+            // Check empty answer
+
+            if (answer === "") {
+
+                alert(
+                    "Please enter an answer."
+                );
+
+                answerInput.focus();
+
+                return;
+
+            }
+
+
+            // Create question object
+
+            const newQuestion = {
+
+                question: question,
+
+                answer: answer
+
+            };
+
+
+            // Add question
+
+            questions.push(newQuestion);
+
+
+            // Save to localStorage
+
+            saveQuestions();
+
+
+            // Update counter
+
+            updateCounter();
+
+
+            // Clear input boxes
+
+            questionInput.value = "";
+
+            answerInput.value = "";
+
+
+            // Put cursor back into question input
+
+            questionInput.focus();
+
+
+            alert(
+
+                "Question " +
+
+                questions.length +
+
+                " / 100 added!"
+
+            );
+
+        }
+
+    );
+
+
+    // ==========================================
+    // PRESS ENTER TO ADD QUESTION
+    // ==========================================
+
+    answerInput.addEventListener(
+
+        "keydown",
+
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                addButton.click();
+
+            }
+
+        }
+
+    );
+
+
+    // ==========================================
+    // SPIN WHEEL
+    // ==========================================
+
+    spinButton.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            // Make sure there are questions
+
+            if (questions.length === 0) {
+
+                alert(
+
+                    "Please add at least one question first!"
+
+                );
+
+                questionInput.focus();
+
+                return;
+
+            }
+
+
+            // Pick random question
+
+            const randomIndex =
+
+                Math.floor(
+
+                    Math.random() *
+
+                    questions.length
+
+                );
+
+
+            // Save selected question
+
+            selectedQuestion =
+
+                questions[randomIndex];
+
+
+            // Show question
+
+            questionResult.textContent =
+
+                selectedQuestion.question;
+
+
+            // Hide answer
+
+            answerResult.textContent = "";
+
+            answerResult.style.display = "none";
+
+
+            // Create random spinning amount
+
+            const spinAmount =
+
+                360 * 5 +
+
+                Math.floor(
+
+                    Math.random() * 360
+
+                );
+
+
+            currentRotation += spinAmount;
+
+
+            // Spin wheel
+
+            wheel.style.transform =
+
+                `rotate(${currentRotation}deg)`;
+
+        }
+
+    );
+
+
+    // ==========================================
+    // REVEAL ANSWER
+    // ==========================================
+
+    revealButton.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            if (selectedQuestion === null) {
+
+                alert(
+
+                    "Spin the wheel first!"
+
+                );
+
+                return;
+
+            }
+
+
+            answerResult.textContent =
+
+                "Answer: " +
+
+                selectedQuestion.answer;
+
+
+            answerResult.style.display =
+
+                "block";
+
+        }
+
+    );
+
+
+    // ==========================================
+    // NEXT QUESTION
+    // ==========================================
+
+    nextButton.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            selectedQuestion = null;
+
+
+            questionResult.textContent =
+
+                "Ready for your next question!";
+
+
+            answerResult.textContent = "";
+
+            answerResult.style.display = "none";
+
+
+            // Allow another spin
+
+            spinButton.disabled = false;
+
+        }
+
+    );
+
+
+    // ==========================================
+    // CLEAR ALL QUESTIONS
+    // ==========================================
+
+    clearButton.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            if (questions.length === 0) {
+
+                alert(
+                    "There are no questions to delete."
+                );
+
+                return;
+
+            }
+
+
+            const confirmDelete =
+
+                confirm(
+
+                    "Are you sure you want to delete all " +
+
+                    questions.length +
+
+                    " questions?"
+
+                );
+
+
+            if (!confirmDelete) {
+
+                return;
+
+            }
+
+
+            // Empty array
+
+            questions = [];
+
+
+            // Remove localStorage
+
+            localStorage.removeItem(
+
+                "studyQuestions"
+
+            );
+
+
+            // Reset selected question
+
+            selectedQuestion = null;
+
+
+            // Update counter
+
+            updateCounter();
+
+
+            // Reset screen
+
+            questionResult.textContent =
+
+                "Your question will appear here";
+
+
+            answerResult.textContent = "";
+
+            answerResult.style.display = "none";
+
+
+            alert(
+
+                "All questions have been deleted!"
+
+            );
+
+        }
+
+    );
+
+</script>
+
+
+</body>
+
+</html>
