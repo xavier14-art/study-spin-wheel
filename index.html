@@ -17,22 +17,209 @@
             box-sizing: border-box;
         }
 
+
         body {
             font-family: Arial, sans-serif;
+
             background: #f1f3f6;
 
             min-height: 100vh;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
             padding: 20px;
+
+            transition: 0.3s;
         }
 
-        .container {
+
+        /* =====================================
+           SIDEBAR
+        ===================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: -320px;
+
+            width: 320px;
+            height: 100vh;
+
+            background: white;
+
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+
+            padding: 25px;
+
+            overflow-y: auto;
+
+            transition: left 0.3s ease;
+
+            z-index: 1000;
+        }
+
+
+        .sidebar.open {
+
+            left: 0;
+
+        }
+
+
+        .sidebar-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        .sidebar-header h2 {
+
+            font-size: 22px;
+
+        }
+
+
+        #closeSidebar {
+
+            background: #e53935;
+
+            color: white;
+
+            padding: 7px 12px;
+
+            font-size: 18px;
+
+        }
+
+
+        .history-item {
+
+            background: #f5f5f5;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            text-align: left;
+        }
+
+
+        .history-number {
+
+            font-size: 13px;
+
+            color: #777;
+
+            margin-bottom: 5px;
+        }
+
+
+        .history-title {
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .history-question {
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .history-answer {
+
+            font-size: 14px;
+
+            color: #444;
+
+            margin-bottom: 10px;
+        }
+
+
+        .rename-input {
+
             width: 100%;
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .rename-button {
+
+            background: #2196F3;
+
+            color: white;
+
+            width: 100%;
+
+            padding: 8px;
+
+            font-size: 14px;
+        }
+
+
+        #emptyHistory {
+
+            color: #777;
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        /* =====================================
+           MENU BUTTON
+        ===================================== */
+
+        #menuButton {
+
+            position: fixed;
+
+            top: 20px;
+            left: 20px;
+
+            background: #222;
+
+            color: white;
+
+            padding: 12px 16px;
+
+            z-index: 900;
+        }
+
+
+        /* =====================================
+           MAIN CONTAINER
+        ===================================== */
+
+        .container {
+
+            width: 100%;
+
             max-width: 700px;
+
+            margin: 40px auto 0;
 
             background: white;
 
@@ -40,24 +227,38 @@
 
             border-radius: 20px;
 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.1);
 
             text-align: center;
         }
 
+
         h1 {
+
             margin-bottom: 10px;
+
         }
+
 
         .counter {
+
             margin-bottom: 25px;
+
             color: #555;
+
         }
 
-        /* INPUT SECTION */
+
+        /* =====================================
+           INPUT
+        ===================================== */
 
         .input-section {
+
             display: flex;
+
             flex-direction: column;
 
             gap: 10px;
@@ -65,7 +266,9 @@
             margin-bottom: 30px;
         }
 
+
         input {
+
             width: 100%;
 
             padding: 13px;
@@ -77,13 +280,17 @@
             font-size: 16px;
         }
 
+
         input:focus {
+
             outline: none;
 
             border-color: #4CAF50;
         }
 
+
         button {
+
             padding: 13px;
 
             border: none;
@@ -95,32 +302,41 @@
             cursor: pointer;
         }
 
+
         #addButton {
+
             background: #4CAF50;
+
             color: white;
         }
 
-        #addButton:hover {
-            background: #388E3C;
-        }
 
-        /* WHEEL */
+        /* =====================================
+           WHEEL
+        ===================================== */
 
         .wheel-section {
+
             margin-top: 20px;
         }
 
+
         .wheel-container {
+
             position: relative;
 
             width: 280px;
+
             height: 280px;
 
             margin: 0 auto 25px;
         }
 
+
         #wheel {
+
             width: 280px;
+
             height: 280px;
 
             border-radius: 50%;
@@ -128,30 +344,45 @@
             border: 8px solid #222;
 
             background: conic-gradient(
+
                 #ff5959 0deg 60deg,
+
                 #ffca3a 60deg 120deg,
+
                 #8ac926 120deg 180deg,
+
                 #1982c4 180deg 240deg,
+
                 #6a4c93 240deg 300deg,
+
                 #ff924c 300deg 360deg
             );
 
+
             transition:
-                transform 4s cubic-bezier(
+
+                transform 4s
+
+                cubic-bezier(
                     0.17,
                     0.67,
                     0.12,
                     0.99
                 );
 
+
             display: flex;
 
             justify-content: center;
+
             align-items: center;
         }
 
+
         .wheel-center {
+
             width: 75px;
+
             height: 75px;
 
             background: white;
@@ -163,14 +394,15 @@
             display: flex;
 
             justify-content: center;
+
             align-items: center;
 
             font-weight: bold;
         }
 
-        /* POINTER */
 
         .pointer {
+
             position: absolute;
 
             top: -15px;
@@ -180,9 +412,11 @@
             transform: translateX(-50%);
 
             width: 0;
+
             height: 0;
 
             border-left: 15px solid transparent;
+
             border-right: 15px solid transparent;
 
             border-top: 30px solid #222;
@@ -190,9 +424,13 @@
             z-index: 10;
         }
 
-        /* BUTTONS */
+
+        /* =====================================
+           WHEEL BUTTONS
+        ===================================== */
 
         #spinButton {
+
             width: 100%;
 
             background: #222;
@@ -202,7 +440,9 @@
             margin-bottom: 10px;
         }
 
+
         #nextButton {
+
             width: 100%;
 
             background: #2196F3;
@@ -210,27 +450,27 @@
             color: white;
 
             margin-bottom: 10px;
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
         }
 
-        #revealButton {
-            background: #ff9800;
 
-            color: white;
+        #nextButton.enabled {
+
+            opacity: 1;
+
+            cursor: pointer;
         }
 
-        #clearButton {
-            width: 100%;
 
-            margin-top: 20px;
-
-            background: #e53935;
-
-            color: white;
-        }
-
-        /* RESULT */
+        /* =====================================
+           RESULT
+        ===================================== */
 
         .result-section {
+
             margin-top: 30px;
 
             padding: 20px;
@@ -240,13 +480,25 @@
             border-radius: 12px;
         }
 
+
         .result-section h2 {
+
             margin-bottom: 20px;
 
             font-size: 20px;
         }
 
+
+        #revealButton {
+
+            background: #ff9800;
+
+            color: white;
+        }
+
+
         #answerResult {
+
             margin-top: 15px;
 
             font-size: 18px;
@@ -256,6 +508,23 @@
             min-height: 25px;
         }
 
+
+        /* =====================================
+           CLEAR BUTTON
+        ===================================== */
+
+        #clearButton {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            background: #e53935;
+
+            color: white;
+        }
+
+
     </style>
 
 </head>
@@ -264,75 +533,130 @@
 <body>
 
 
-<div class="container">
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar" id="sidebar">
 
 
-    <h1>🎡 Study Spin Wheel</h1>
+        <div class="sidebar-header">
+
+            <h2>📚 Spin History</h2>
+
+            <button id="closeSidebar">✕</button>
+
+        </div>
 
 
-    <p class="counter">
+        <div id="historyList">
 
-        Questions:
+            <p id="emptyHistory">
 
-        <span id="questionCount">0</span>
+                No spins yet.
 
-        / 100
+            </p>
 
-    </p>
-
-
-    <!-- ============================= -->
-    <!-- QUESTION INPUT -->
-    <!-- ============================= -->
-
-    <div class="input-section">
+        </div>
 
 
-        <input
-            type="text"
-            id="questionInput"
-            placeholder="Enter your question"
-            autocomplete="off"
-        >
+    </aside>
 
 
-        <input
-            type="text"
-            id="answerInput"
-            placeholder="Enter the answer"
-            autocomplete="off"
-        >
+    <!-- MENU -->
+
+    <button id="menuButton">
+
+        ☰ History
+
+    </button>
 
 
-        <button id="addButton">
 
-            ➕ Add Question
+    <!-- =====================================
+         MAIN
+    ====================================== -->
 
-        </button>
-
-
-    </div>
+    <div class="container">
 
 
-    <!-- ============================= -->
-    <!-- WHEEL -->
-    <!-- ============================= -->
+        <h1>
 
-    <div class="wheel-section">
+            🎡 Study Spin Wheel
 
-
-        <div class="wheel-container">
+        </h1>
 
 
-            <div class="pointer"></div>
+        <p class="counter">
+
+            Questions:
+
+            <span id="questionCount">0</span>
+
+            / 100
+
+        </p>
 
 
-            <div id="wheel">
+        <!-- INPUT -->
+
+        <div class="input-section">
 
 
-                <div class="wheel-center">
+            <input
 
-                    SPIN
+                type="text"
+
+                id="questionInput"
+
+                placeholder="Enter your question"
+
+                autocomplete="off"
+            >
+
+
+            <input
+
+                type="text"
+
+                id="answerInput"
+
+                placeholder="Enter the answer"
+
+                autocomplete="off"
+            >
+
+
+            <button id="addButton">
+
+                ➕ Add Question
+
+            </button>
+
+
+        </div>
+
+
+        <!-- WHEEL -->
+
+        <div class="wheel-section">
+
+
+            <div class="wheel-container">
+
+
+                <div class="pointer"></div>
+
+
+                <div id="wheel">
+
+
+                    <div class="wheel-center">
+
+                        SPIN
+
+                    </div>
+
 
                 </div>
 
@@ -340,19 +664,53 @@
             </div>
 
 
+            <button id="spinButton">
+
+                🎡 Spin the Wheel
+
+            </button>
+
+
+            <button id="nextButton">
+
+                🔄 Next Spin
+
+            </button>
+
+
         </div>
 
 
-        <button id="spinButton">
+        <!-- RESULT -->
 
-            🎡 Spin the Wheel
-
-        </button>
+        <div class="result-section">
 
 
-        <button id="nextButton">
+            <h2 id="questionResult">
 
-            🔄 Next Question
+                Your question will appear here
+
+            </h2>
+
+
+            <button id="revealButton">
+
+                👀 Reveal Answer
+
+            </button>
+
+
+            <p id="answerResult"></p>
+
+
+        </div>
+
+
+        <!-- CLEAR -->
+
+        <button id="clearButton">
+
+            🗑️ Clear All Questions
 
         </button>
 
@@ -360,136 +718,137 @@
     </div>
 
 
-    <!-- ============================= -->
-    <!-- RESULT -->
-    <!-- ============================= -->
 
-    <div class="result-section">
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
 
-
-        <h2 id="questionResult">
-
-            Your question will appear here
-
-        </h2>
+    <script>
 
 
-        <button id="revealButton">
+        // =====================================
+        // SETTINGS
+        // =====================================
 
-            👀 Reveal Answer
-
-        </button>
-
-
-        <p id="answerResult"></p>
+        const MAX_QUESTIONS = 100;
 
 
-    </div>
+        // =====================================
+        // VARIABLES
+        // =====================================
+
+        let questions = [];
+
+        let selectedQuestion = null;
+
+        let currentRotation = 0;
+
+        let spinFinished = false;
 
 
-    <!-- ============================= -->
-    <!-- CLEAR -->
-    <!-- ============================= -->
+        // =====================================
+        // HTML ELEMENTS
+        // =====================================
 
-    <button id="clearButton">
-
-        🗑️ Clear All Questions
-
-    </button>
-
-
-</div>
+        const questionInput =
+            document.getElementById(
+                "questionInput"
+            );
 
 
-
-<script>
-
-
-    // ==========================================
-    // SETTINGS
-    // ==========================================
-
-    const MAX_QUESTIONS = 100;
+        const answerInput =
+            document.getElementById(
+                "answerInput"
+            );
 
 
-    // ==========================================
-    // VARIABLES
-    // ==========================================
-
-    let questions = [];
-
-    let selectedQuestion = null;
-
-    let currentRotation = 0;
+        const addButton =
+            document.getElementById(
+                "addButton"
+            );
 
 
-    // ==========================================
-    // GET HTML ELEMENTS
-    // ==========================================
-
-    const questionInput =
-        document.getElementById("questionInput");
-
-    const answerInput =
-        document.getElementById("answerInput");
-
-    const addButton =
-        document.getElementById("addButton");
-
-    const spinButton =
-        document.getElementById("spinButton");
-
-    const nextButton =
-        document.getElementById("nextButton");
-
-    const revealButton =
-        document.getElementById("revealButton");
-
-    const clearButton =
-        document.getElementById("clearButton");
-
-    const questionResult =
-        document.getElementById("questionResult");
-
-    const answerResult =
-        document.getElementById("answerResult");
-
-    const questionCount =
-        document.getElementById("questionCount");
-
-    const wheel =
-        document.getElementById("wheel");
+        const spinButton =
+            document.getElementById(
+                "spinButton"
+            );
 
 
-    // ==========================================
-    // LOAD SAVED QUESTIONS
-    // ==========================================
+        const nextButton =
+            document.getElementById(
+                "nextButton"
+            );
 
-    function loadQuestions() {
 
-        const savedData =
-            localStorage.getItem("studyQuestions");
+        const revealButton =
+            document.getElementById(
+                "revealButton"
+            );
 
-        if (savedData) {
+
+        const clearButton =
+            document.getElementById(
+                "clearButton"
+            );
+
+
+        const questionResult =
+            document.getElementById(
+                "questionResult"
+            );
+
+
+        const answerResult =
+            document.getElementById(
+                "answerResult"
+            );
+
+
+        const questionCount =
+            document.getElementById(
+                "questionCount"
+            );
+
+
+        const wheel =
+            document.getElementById(
+                "wheel"
+            );
+
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+
+        const historyList =
+            document.getElementById(
+                "historyList"
+            );
+
+
+        // =====================================
+        // LOAD QUESTIONS
+        // =====================================
+
+        const savedQuestions =
+
+            localStorage.getItem(
+                "studyQuestions"
+            );
+
+
+        if (savedQuestions) {
 
             try {
 
-                const data =
-                    JSON.parse(savedData);
+                questions =
+                    JSON.parse(
+                        savedQuestions
+                    );
 
-                // Make sure the saved data is an array
-
-                if (Array.isArray(data)) {
-
-                    questions = data;
-
-                }
-
-            } catch (error) {
-
-                console.log(
-                    "Could not load saved questions."
-                );
+            } catch {
 
                 questions = [];
 
@@ -497,432 +856,711 @@
 
         }
 
-    }
 
+        // =====================================
+        // UPDATE COUNTER
+        // =====================================
 
-    loadQuestions();
+        function updateCounter() {
 
+            questionCount.textContent =
+                questions.length;
 
-    // ==========================================
-    // UPDATE COUNTER
-    // ==========================================
+        }
 
-    function updateCounter() {
 
-        questionCount.textContent =
-            questions.length;
+        updateCounter();
 
-    }
 
+        // =====================================
+        // SAVE QUESTIONS
+        // =====================================
 
-    updateCounter();
+        function saveQuestions() {
 
+            localStorage.setItem(
 
-    // ==========================================
-    // SAVE QUESTIONS
-    // ==========================================
+                "studyQuestions",
 
-    function saveQuestions() {
-
-        localStorage.setItem(
-
-            "studyQuestions",
-
-            JSON.stringify(questions)
-
-        );
-
-    }
-
-
-    // ==========================================
-    // ADD QUESTION
-    // ==========================================
-
-    addButton.addEventListener(
-
-        "click",
-
-        function() {
-
-
-            // Get input values
-
-            const question =
-                questionInput.value.trim();
-
-            const answer =
-                answerInput.value.trim();
-
-
-            // Check maximum
-
-            if (questions.length >= MAX_QUESTIONS) {
-
-                alert(
-                    "You have reached the maximum of 100 questions!"
-                );
-
-                return;
-
-            }
-
-
-            // Check empty question
-
-            if (question === "") {
-
-                alert(
-                    "Please enter a question."
-                );
-
-                questionInput.focus();
-
-                return;
-
-            }
-
-
-            // Check empty answer
-
-            if (answer === "") {
-
-                alert(
-                    "Please enter an answer."
-                );
-
-                answerInput.focus();
-
-                return;
-
-            }
-
-
-            // Create question object
-
-            const newQuestion = {
-
-                question: question,
-
-                answer: answer
-
-            };
-
-
-            // Add question
-
-            questions.push(newQuestion);
-
-
-            // Save to localStorage
-
-            saveQuestions();
-
-
-            // Update counter
-
-            updateCounter();
-
-
-            // Clear input boxes
-
-            questionInput.value = "";
-
-            answerInput.value = "";
-
-
-            // Put cursor back into question input
-
-            questionInput.focus();
-
-
-            alert(
-
-                "Question " +
-
-                questions.length +
-
-                " / 100 added!"
+                JSON.stringify(
+                    questions
+                )
 
             );
 
         }
 
-    );
+
+        // =====================================
+        // ADD QUESTION
+        // =====================================
+
+        addButton.addEventListener(
+
+            "click",
+
+            function() {
 
 
-    // ==========================================
-    // PRESS ENTER TO ADD QUESTION
-    // ==========================================
-
-    answerInput.addEventListener(
-
-        "keydown",
-
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                addButton.click();
-
-            }
-
-        }
-
-    );
+                const question =
+                    questionInput.value.trim();
 
 
-    // ==========================================
-    // SPIN WHEEL
-    // ==========================================
-
-    spinButton.addEventListener(
-
-        "click",
-
-        function() {
+                const answer =
+                    answerInput.value.trim();
 
 
-            // Make sure there are questions
+                if (
+                    questions.length >=
+                    MAX_QUESTIONS
+                ) {
 
-            if (questions.length === 0) {
+                    alert(
+                        "You already have 100 questions!"
+                    );
 
-                alert(
+                    return;
 
-                    "Please add at least one question first!"
+                }
 
-                );
+
+                if (question === "") {
+
+                    alert(
+                        "Please enter a question."
+                    );
+
+                    questionInput.focus();
+
+                    return;
+
+                }
+
+
+                if (answer === "") {
+
+                    alert(
+                        "Please enter an answer."
+                    );
+
+                    answerInput.focus();
+
+                    return;
+
+                }
+
+
+                questions.push({
+
+                    question: question,
+
+                    answer: answer
+
+                });
+
+
+                saveQuestions();
+
+                updateCounter();
+
+
+                questionInput.value = "";
+
+                answerInput.value = "";
+
 
                 questionInput.focus();
 
-                return;
-
-            }
-
-
-            // Pick random question
-
-            const randomIndex =
-
-                Math.floor(
-
-                    Math.random() *
-
-                    questions.length
-
-                );
-
-
-            // Save selected question
-
-            selectedQuestion =
-
-                questions[randomIndex];
-
-
-            // Show question
-
-            questionResult.textContent =
-
-                selectedQuestion.question;
-
-
-            // Hide answer
-
-            answerResult.textContent = "";
-
-            answerResult.style.display = "none";
-
-
-            // Create random spinning amount
-
-            const spinAmount =
-
-                360 * 5 +
-
-                Math.floor(
-
-                    Math.random() * 360
-
-                );
-
-
-            currentRotation += spinAmount;
-
-
-            // Spin wheel
-
-            wheel.style.transform =
-
-                `rotate(${currentRotation}deg)`;
-
-        }
-
-    );
-
-
-    // ==========================================
-    // REVEAL ANSWER
-    // ==========================================
-
-    revealButton.addEventListener(
-
-        "click",
-
-        function() {
-
-
-            if (selectedQuestion === null) {
 
                 alert(
 
-                    "Spin the wheel first!"
-
-                );
-
-                return;
-
-            }
-
-
-            answerResult.textContent =
-
-                "Answer: " +
-
-                selectedQuestion.answer;
-
-
-            answerResult.style.display =
-
-                "block";
-
-        }
-
-    );
-
-
-    // ==========================================
-    // NEXT QUESTION
-    // ==========================================
-
-    nextButton.addEventListener(
-
-        "click",
-
-        function() {
-
-
-            selectedQuestion = null;
-
-
-            questionResult.textContent =
-
-                "Ready for your next question!";
-
-
-            answerResult.textContent = "";
-
-            answerResult.style.display = "none";
-
-
-            // Allow another spin
-
-            spinButton.disabled = false;
-
-        }
-
-    );
-
-
-    // ==========================================
-    // CLEAR ALL QUESTIONS
-    // ==========================================
-
-    clearButton.addEventListener(
-
-        "click",
-
-        function() {
-
-
-            if (questions.length === 0) {
-
-                alert(
-                    "There are no questions to delete."
-                );
-
-                return;
-
-            }
-
-
-            const confirmDelete =
-
-                confirm(
-
-                    "Are you sure you want to delete all " +
+                    "Question " +
 
                     questions.length +
 
-                    " questions?"
+                    " / 100 added!"
 
                 );
 
+            }
 
-            if (!confirmDelete) {
+        );
 
-                return;
+
+        // =====================================
+        // ENTER TO ADD
+        // =====================================
+
+        answerInput.addEventListener(
+
+            "keydown",
+
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+                    addButton.click();
+
+                }
+
+            }
+
+        );
+
+
+        // =====================================
+        // SPIN
+        // =====================================
+
+        spinButton.addEventListener(
+
+            "click",
+
+            function() {
+
+
+                if (
+                    questions.length === 0
+                ) {
+
+                    alert(
+                        "Please add a question first!"
+                    );
+
+                    return;
+
+                }
+
+
+                // Prevent another spin
+                // before clicking Next Spin
+
+                if (!spinFinished &&
+                    selectedQuestion !== null
+                ) {
+
+                    alert(
+                        "Click Next Spin first!"
+                    );
+
+                    return;
+
+                }
+
+
+                spinFinished = false;
+
+                nextButton.classList.remove(
+                    "enabled"
+                );
+
+
+                selectedQuestion = null;
+
+
+                answerResult.textContent = "";
+
+                answerResult.style.display =
+                    "none";
+
+
+                // RANDOM QUESTION
+
+                const randomIndex =
+
+                    Math.floor(
+
+                        Math.random() *
+
+                        questions.length
+
+                    );
+
+
+                selectedQuestion =
+
+                    questions[randomIndex];
+
+
+                questionResult.textContent =
+
+                    selectedQuestion.question;
+
+
+                // SPIN ANIMATION
+
+                const spinAmount =
+
+                    360 * 5 +
+
+                    Math.floor(
+
+                        Math.random() * 360
+
+                    );
+
+
+                currentRotation +=
+                    spinAmount;
+
+
+                wheel.style.transform =
+
+                    `rotate(${currentRotation}deg)`;
+
+
+                // Wait for animation
+
+                setTimeout(
+
+                    function() {
+
+                        spinFinished = true;
+
+                        nextButton.classList.add(
+                            "enabled"
+                        );
+
+
+                        // ADD TO HISTORY
+
+                        addToHistory(
+                            selectedQuestion
+                        );
+
+                    },
+
+                    4000
+
+                );
+
+            }
+
+        );
+
+
+        // =====================================
+        // NEXT SPIN
+        // =====================================
+
+        nextButton.addEventListener(
+
+            "click",
+
+            function() {
+
+
+                if (!spinFinished) {
+
+                    return;
+
+                }
+
+
+                selectedQuestion = null;
+
+
+                spinFinished = false;
+
+
+                questionResult.textContent =
+
+                    "Ready for your next spin!";
+
+
+                answerResult.textContent = "";
+
+                answerResult.style.display =
+                    "none";
+
+
+                nextButton.classList.remove(
+                    "enabled"
+                );
+
+
+            }
+
+        );
+
+
+        // =====================================
+        // REVEAL ANSWER
+        // =====================================
+
+        revealButton.addEventListener(
+
+            "click",
+
+            function() {
+
+
+                if (
+                    selectedQuestion === null
+                ) {
+
+                    alert(
+                        "Spin the wheel first!"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!spinFinished) {
+
+                    alert(
+                        "Wait until the wheel stops!"
+                    );
+
+                    return;
+
+                }
+
+
+                answerResult.textContent =
+
+                    "Answer: " +
+
+                    selectedQuestion.answer;
+
+
+                answerResult.style.display =
+                    "block";
+
+            }
+
+        );
+
+
+        // =====================================
+        // ADD HISTORY
+        // =====================================
+
+        function addToHistory(question) {
+
+
+            const historyList =
+                document.getElementById(
+                    "historyList"
+                );
+
+
+            // Remove empty message
+
+            const emptyHistory =
+                document.getElementById(
+                    "emptyHistory"
+                );
+
+
+            if (emptyHistory) {
+
+                emptyHistory.remove();
 
             }
 
 
-            // Empty array
+            // Create history item
 
-            questions = [];
+            const historyItem =
+                document.createElement(
+                    "div"
+                );
 
 
-            // Remove localStorage
+            historyItem.className =
+                "history-item";
 
-            localStorage.removeItem(
 
-                "studyQuestions"
+            const historyNumber =
+                historyList.children.length + 1;
+
+
+            historyItem.innerHTML = `
+
+                <div class="history-number">
+
+                    Spin #${historyNumber}
+
+                </div>
+
+
+                <div class="history-title">
+
+                    Untitled Spin
+
+                </div>
+
+
+                <div class="history-question">
+
+                    <strong>Question:</strong><br>
+
+                    ${escapeHTML(
+                        question.question
+                    )}
+
+                </div>
+
+
+                <div class="history-answer">
+
+                    <strong>Answer:</strong><br>
+
+                    ${escapeHTML(
+                        question.answer
+                    )}
+
+                </div>
+
+
+                <input
+
+                    class="rename-input"
+
+                    type="text"
+
+                    placeholder="Rename this spin"
+
+                >
+
+
+                <button class="rename-button">
+
+                    ✏️ Rename
+
+                </button>
+
+            `;
+
+
+            // Rename button
+
+            const renameButton =
+
+                historyItem.querySelector(
+                    ".rename-button"
+                );
+
+
+            const renameInput =
+
+                historyItem.querySelector(
+                    ".rename-input"
+                );
+
+
+            const title =
+
+                historyItem.querySelector(
+                    ".history-title"
+                );
+
+
+            renameButton.addEventListener(
+
+                "click",
+
+                function() {
+
+
+                    const newName =
+
+                        renameInput.value.trim();
+
+
+                    if (newName === "") {
+
+                        alert(
+                            "Please enter a name."
+                        );
+
+                        return;
+
+                    }
+
+
+                    title.textContent =
+                        newName;
+
+
+                    renameInput.value = "";
+
+                }
 
             );
 
 
-            // Reset selected question
-
-            selectedQuestion = null;
-
-
-            // Update counter
-
-            updateCounter();
-
-
-            // Reset screen
-
-            questionResult.textContent =
-
-                "Your question will appear here";
-
-
-            answerResult.textContent = "";
-
-            answerResult.style.display = "none";
-
-
-            alert(
-
-                "All questions have been deleted!"
-
+            historyList.prepend(
+                historyItem
             );
 
         }
 
-    );
 
-</script>
+        // =====================================
+        // PROTECT HTML
+        // =====================================
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent = text;
+
+
+            return div.innerHTML;
+
+        }
+
+
+        // =====================================
+        // OPEN SIDEBAR
+        // =====================================
+
+        document.getElementById(
+            "menuButton"
+        ).addEventListener(
+
+            "click",
+
+            function() {
+
+                sidebar.classList.add(
+                    "open"
+                );
+
+            }
+
+        );
+
+
+        // =====================================
+        // CLOSE SIDEBAR
+        // =====================================
+
+        document.getElementById(
+            "closeSidebar"
+        ).addEventListener(
+
+            "click",
+
+            function() {
+
+                sidebar.classList.remove(
+                    "open"
+                );
+
+            }
+
+        );
+
+
+        // =====================================
+        // CLEAR QUESTIONS
+        // =====================================
+
+        clearButton.addEventListener(
+
+            "click",
+
+            function() {
+
+
+                if (
+                    questions.length === 0
+                ) {
+
+                    alert(
+                        "There are no questions."
+                    );
+
+                    return;
+
+                }
+
+
+                const confirmDelete =
+
+                    confirm(
+
+                        "Delete all " +
+
+                        questions.length +
+
+                        " questions?"
+
+                    );
+
+
+                if (!confirmDelete) {
+
+                    return;
+
+                }
+
+
+                questions = [];
+
+                selectedQuestion = null;
+
+                spinFinished = false;
+
+
+                localStorage.removeItem(
+                    "studyQuestions"
+                );
+
+
+                updateCounter();
+
+
+                questionResult.textContent =
+
+                    "Your question will appear here";
+
+
+                answerResult.textContent = "";
+
+                answerResult.style.display =
+                    "none";
+
+
+                historyList.innerHTML = `
+
+                    <p id="emptyHistory">
+
+                        No spins yet.
+
+                    </p>
+
+                `;
+
+
+                nextButton.classList.remove(
+                    "enabled"
+                );
+
+
+                alert(
+                    "All questions deleted!"
+                );
+
+            }
+
+        );
+
+
+    </script>
 
 
 </body>
